@@ -9,6 +9,7 @@ function GameManager(size, InputManager, Actuator, StorageManager) {
   this.inputManager.on("move", this.move.bind(this));
   this.inputManager.on("restart", this.restart.bind(this));
   this.inputManager.on("keepPlaying", this.keepPlaying.bind(this));
+  this.inputManager.on("cheat", this.cheat.bind(this));
 
   this.setup();
 }
@@ -29,6 +30,22 @@ GameManager.prototype.keepPlaying = function () {
 // Return true if the game is lost, or has won and the user hasn't kept playing
 GameManager.prototype.isGameTerminated = function () {
   return this.over || (this.won && !this.keepPlaying);
+};
+
+GameManager.prototype.cheat = function() {
+  var self = this;
+  this.grid.eachCell(function (x, y, tile) {
+    	if (tile) {
+      		console.log("value: " + tile.value + " " + tile.x + " " + tile.y)
+		//var t = new Tile(tile.x, tile.y, tile.value * 2);
+		//self.grid.insertTile(t);
+		//self.grid.removeTile(tile);	
+		tile.value *= 2;
+		self.score += tile.value;
+		self.actuate();
+    	}
+  });
+
 };
 
 // Set up the game
