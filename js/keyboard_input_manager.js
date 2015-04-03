@@ -75,6 +75,7 @@ KeyboardInputManager.prototype.listen = function () {
   this.bindButtonPress(".retry-button", this.restart);
   this.bindButtonPress(".restart-button", this.restart);
   this.bindButtonPress(".keep-playing-button", this.keepPlaying);
+  this.bindButtonPress(".cheat-button", this.cheat);
 
   // Respond to swipe events
   var touchStartClientX, touchStartClientY;
@@ -150,4 +151,9 @@ KeyboardInputManager.prototype.bindButtonPress = function (selector, fn) {
 
 KeyboardInputManager.prototype.targetIsInput = function (event) {
   return event.target.tagName.toLowerCase() === "input";
+};
+
+KeyboardInputManager.prototype.cheat = function(selector, fn) {
+	event.preventDefault();
+	this.emit("cheat");	
 };

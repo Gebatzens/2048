@@ -1,3 +1,12 @@
+function Tile(px, py, value) {
+	this.x = px;
+	this.y = py;
+	this.value = value || 2;
+
+	this.previousPosition = null;
+	this.mergedFrom = null;
+}
+
 function Tile(position, value) {
   this.x                = position.x;
   this.y                = position.y;
